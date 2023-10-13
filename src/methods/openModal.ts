@@ -16,9 +16,11 @@ import {WrapComponent} from "../types/types";
  */
 export default function openModal< P extends WrapComponent>(component: P | string, props: any = {}, options: Partial<ModalOptions> = {}):Promise<Modal>
 {
-    return closeModal()
+    return closeModal(options.containerId)
+/* // disabling this because we sometimes only close a subset of the queue (in the case of multiple instances on one page)
    .then(() => {
        if (modalQueue.value.length) throw ModalError.QueueNoEmpty();
    })
+*/
     .then(() => pushModal(component, props, options))
 }

@@ -18,7 +18,8 @@ import DtoModalOptions from "./dto-modal-options";
 
 export interface ModalOptions {
     backgroundClose: boolean,
-    isRoute: boolean
+    isRoute: boolean,
+    containerId: string
 }
 
 
@@ -56,6 +57,8 @@ export default class Modal{
      * @description If modal was opened like Route instance (useModalRouter) the value is true, otherwise false.
      */
     public readonly isRoute: boolean = false;
+
+    public containerId: string = '';
 
     /**
      * @description Event using for promptModal.
@@ -104,10 +107,11 @@ export default class Modal{
         */
         if (component.beforeModalClose)
             guards.add(this.id, "close", component.beforeModalClose);
-        
+
         const dtoOptions = DtoModalOptions(options);
         this.backgroundClose = dtoOptions.backgroundClose;
         this.isRoute = dtoOptions.isRoute;
+        this.containerId = dtoOptions.containerId;
     }
 
     /**
